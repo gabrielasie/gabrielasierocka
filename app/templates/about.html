@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <h1 class="section-heading"><span class="num">01</span> About</h1>
+  <div class="prose">
+    {% for para in about %}
+      <p>{{ para }}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

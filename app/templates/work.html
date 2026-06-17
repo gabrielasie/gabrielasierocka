@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Work{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <h1 class="section-heading"><span class="num">02</span> Work</h1>
+  <ul class="timeline">
+    {% for job in work %}
+      <li class="timeline-item">
+        <div class="timeline-head">
+          <h2>{{ job.role }} <span class="at">·</span> {{ job.org }}</h2>
+          <span class="dates">{{ job.dates }}</span>
+        </div>
+        <p>{{ job.summary }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

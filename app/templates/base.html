@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ profile.name }}{% endblock %} · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('index') }}">{{ profile.name }}</a>
+    <nav class="nav">
+      {# Loops over PAGES from the app, so the menu updates itself. #}
+      {% for endpoint, label in pages %}
+        <a href="{{ url_for(endpoint) }}"
+           class="nav-link {% if request.endpoint == endpoint %}active{% endif %}">
+          {{ label }}
+        </a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <span>{{ profile.location }}</span>
+    <span class="dot">·</span>
+    <a href="{{ profile.github }}">GitHub</a>
+    <span class="dot">·</span>
+    <a href="{{ profile.linkedin }}">LinkedIn</a>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

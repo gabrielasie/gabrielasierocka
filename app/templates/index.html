@@ -1,40 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Personal Portfolio">
-    <meta property="og:description" content="My Personal Portfolio">
-    <meta property="og:url" content="{{ url }}">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
-    <title>{{ title }}</title>
-</head>
-
-<body>
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-        </div>
-    </header>
-
-    <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
-        </div>
-        <h1>{{ title }}</h1>
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">{{ profile.location }}</p>
+    <h1>{{ profile.name }}</h1>
+    <p class="tagline">{{ profile.tagline }}</p>
+    <p class="blurb">{{ profile.blurb }}</p>
+    <div class="hero-actions">
+      <a class="btn" href="{{ url_for('work') }}">See my work</a>
+      <a class="btn btn-ghost" href="{{ url_for('places') }}">Where I've been</a>
     </div>
-</body>
-</html>
+  </div>
+  <div class="hero-photo">
+    {# Replace app/static/img/profile.jpg with a real photo. #}
+    <img src="{{ url_for('static', filename=profile.photo) }}"
+         alt="Photo of {{ profile.name }}"
+         onerror="this.classList.add('img-missing'); this.alt='Add your photo at static/img/profile.jpg';">
+  </div>
+</section>
+
+<section class="about-preview">
+  <h2 class="section-heading"><span class="num">01</span> About</h2>
+  <p>{{ about[0] }}</p>
+  <a class="read-more" href="{{ url_for('about') }}">Read more →</a>
+</section>
+{% endblock %}
