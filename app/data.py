@@ -123,36 +123,38 @@ WORK = [
     },
 ]
 
-# --- Founding & projects ---
+# --- Projects ---
+# Same data-driven shape as WORK/HOBBIES: each entry is a dict the projects
+# template loops over. name + description are required; link and tech are
+# optional (empty string means "no link / no stack shown").
 PROJECTS = [
     {
         "name": "CommuniCura",
-        "role": "Co-Founder",
-        "dates": "Sep 2024 – May 2026",
-        "location": "Notre Dame, IN",
-        "bullets": [
-            "Co-founded and ran an assistive-AI startup that gives people with "
-            "profound intellectual and multiple disabilities a voice, turning "
-            "gaze and expression into communication with computer vision.",
-            "Owned go-to-market, product design, and the early vision build; "
-            "coordinated clinicians, university partners, and funding; and "
-            "reached the semifinals of Notre Dame's McCloskey New Venture "
-            "Competition (top 5%).",
-        ],
-        "link": {"label": "voice4pimd.org", "url": "https://voice4pimd.org"},
+        "description": (
+            "Assistive-AI tool that uses computer vision to help people with "
+            "profound disabilities communicate through gaze and expression."
+        ),
+        "tech": "Computer vision",
+        "link": "",
     },
     {
-        "name": "Soma",
-        "role": "Personal AI assistant with spoken daily briefings",
-        "dates": "2026",
-        "location": "Personal project",
-        "bullets": [
-            "Built end to end: pulls Oura, calendar, and weather into a daily "
-            "brief, delivered as speech through the ElevenLabs API, with a "
-            "deterministic engine making the decisions and an LLM only "
-            "narrating. Public repo and demo.",
-        ],
-        "link": {"label": "github.com/gabrielasie/soma", "url": "https://github.com/gabrielasie/soma"},
+        "name": "Leadership Tap (Enrite)",
+        "description": (
+            "Full-stack coaching platform built in Next.js and TypeScript with "
+            "Microsoft Graph calendar sync."
+        ),
+        "tech": "Next.js, TypeScript, Microsoft Graph API",
+        "link": "",
+    },
+    {
+        "name": "Agent Economics Lab",
+        "description": (
+            "Sealed-bid second-price auction simulation with LLM bidding agents, "
+            "deployed on Streamlit. Agents shade bids under first-price rules but "
+            "bid truthfully under second-price."
+        ),
+        "tech": "Python, Streamlit, LLM agents",
+        "link": "",
     },
 ]
 
