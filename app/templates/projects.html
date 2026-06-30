@@ -3,25 +3,18 @@
 
 {% block content %}
 <section class="page-section">
-  <h1 class="section-heading"><span class="num">03</span> Founding &amp; Projects</h1>
-  <ul class="timeline">
+  <h1 class="section-heading"><span class="num">03</span> Projects</h1>
+  <div class="card-grid">
     {% for project in projects %}
-      <li class="timeline-item">
-        <div class="timeline-head">
-          <h2>{{ project.name }}{% if project.role %} <span class="at">·</span> {{ project.role }}{% endif %}</h2>
-          <span class="dates">{{ project.dates }}</span>
-        </div>
-        {% if project.location %}<p class="meta">{{ project.location }}</p>{% endif %}
-        {% if project.bullets %}
-          <ul class="bullets">
-            {% for point in project.bullets %}<li>{{ point }}</li>{% endfor %}
-          </ul>
+      <article class="card">
+        <h2>{{ project.name }}</h2>
+        <p>{{ project.description }}</p>
+        {% if project.tech %}<p class="card-tech">{{ project.tech }}</p>{% endif %}
+        {% if project.link and project.link != '#' %}
+          <p><a href="{{ project.link }}" target="_blank" rel="noopener">Visit →</a></p>
         {% endif %}
-        {% if project.link %}
-          <p class="entry-link"><a href="{{ project.link.url }}" target="_blank" rel="noopener">{{ project.link.label }} →</a></p>
-        {% endif %}
-      </li>
+      </article>
     {% endfor %}
-  </ul>
+  </div>
 </section>
 {% endblock %}
