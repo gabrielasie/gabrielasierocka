@@ -1,5 +1,5 @@
 """
-Single source of truth for all portfolio content.
+Single source of truth for all portfolio content. 
 
 Everything the templates render comes from here. To add a new work
 experience, project, education entry, skill group, publication, or map
