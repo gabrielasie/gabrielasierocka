@@ -65,6 +65,9 @@ PAGES_MH = [
     ("mh_places", "Map"),
 ]
 
+@app.route("/timeline")
+def timeline():
+    return render_template("timeline.html")
 
 @app.context_processor
 def inject_globals():
