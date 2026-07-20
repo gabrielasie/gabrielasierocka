@@ -11,15 +11,22 @@ load_dotenv()
 
 app = Flask(__name__)
 
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
+mysql_database = os.getenv("MYSQL_DATABASE")
+mysql_user = os.getenv("MYSQL_USER")
+mysql_password = os.getenv("MYSQL_PASSWORD")
+mysql_host = os.getenv("MYSQL_HOST")
 
-print(mydb)
+if mysql_database and mysql_user and mysql_host:
+    mydb = MySQLDatabase(
+        mysql_database,
+        user=mysql_user,
+        password=mysql_password,
+        host=mysql_host,
+        port=3306,
+    )
+else:
+    # Keep the model importable for tests even when MySQL isn't configured.
+    mydb = MySQLDatabase(None)
 
 # Anything secret/configurable comes from the environment, never hardcoded.
 # See example.env. This satisfies the "use environment variables" tip.
@@ -36,8 +43,9 @@ class TimelinePost(Model):
         database = mydb
 
 
-mydb.connect()
-mydb.create_tables([TimelinePost])
+if not mydb.is_closed() or mydb.database:
+    mydb.connect(reuse_if_open=True)
+    mydb.create_tables([TimelinePost])
 
 
 # The navbar renders from this list. (endpoint, label) pairs.
