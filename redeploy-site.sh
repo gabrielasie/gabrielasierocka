@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# 1. Go to the project folder
+# 1. Go to the project folder on the VPS
 cd /root/gabrielasierocka
 
 # 2. Force the local repo to match origin/main exactly
 git fetch
 git reset origin/main --hard
 
-# 3. Enter the virtual environment and install dependencies
-source python3-virtualenv/bin/activate
-pip install -r requirements.txt
+# 3. Stop and remove the old containers, then rebuild and start fresh
+docker compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml up -d --build
 
-# 4. Restart the service to pick up the new code
-sudo systemctl restart myportfolio
-
-echo "Redeploy complete. Service status:"
-systemctl is-active myportfolio
+echo "Redeploy complete. Container status:"
+docker compose -f docker-compose.prod.yml ps
