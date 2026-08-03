@@ -16,6 +16,8 @@ services:
   nginx:
     image: jonasal/nginx-certbot:latest
     restart: always
+    depends_on:
+      - myportfolio
     environment:
       - CERTBOT_EMAIL=gsierocka@gmail.com
     ports:
